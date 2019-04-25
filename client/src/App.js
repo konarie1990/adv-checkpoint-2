@@ -1,20 +1,25 @@
-import React, { Component } from "react";
-import "./App.css";
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import { Provider } from "react-redux";
+import Router from "./router";
+import store from "./store";
 
-class App extends Component {
-  constructor() {
-    super();
+const GlobalStyle = createGlobalStyle`
+  body {
+    /* background: #383838;
+    color: #fff; */
+    font-family: "Comic Sans MS", cursive, sans-serif;
   }
-  componentDidMount() {
-  }
-  render() {
-    return (
-      <div>
-        Client
-      </div>
-    );
-  }
-}
-export default (App);
+`;
 
+const App = () => (
+  <BrowserRouter>
+    <Provider store={store}>
+      <GlobalStyle />
+      <Router />
+    </Provider>
+  </BrowserRouter>
+);
 
+export default App;

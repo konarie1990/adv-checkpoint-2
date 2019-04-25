@@ -1,11 +1,20 @@
-import {combineReducers} from "redux";
+import { combineReducers } from "redux";
 
-function someThing(state = "") { 
-  return state;
-}
+const cats = (state = [], action) => {
+  const newState = [...state];
+  switch (action.type) {
+    case "LIST_CATS":
+      return action.value;
+    case "CREATE_CAT":
+      newState.push(action.value);
+      return newState;
+    case "DELETE_CAT":
+      const index = newState.findIndex(c => c._id === action.value);
+      newState.splice(index, 1);
+      return newState;
+    default:
+      return state;
+  }
+};
 
-
-const rootReducer = combineReducers({
-  someThing
-});
-export default rootReducer;
+export default combineReducers({ cats });
